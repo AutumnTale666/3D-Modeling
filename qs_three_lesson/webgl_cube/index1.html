@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, 
+     initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Three.js 立方体</title>
+  <script src="http://cdn.bootcss.com/three.js/r56/three.min.js">
+  </script>  
+</head>
+<body>
+  <canvas id="webglcanvas" width="500"
+  height="500" 
+  style="background-color:#000;
+  margin:0 auto;display:block;">
+  </canvas>
+  <script>
+    // canvas 容器
+    // 3D电影
+    // 主体对象 
+    let camera = null;
+    // 场景
+    let scene = null;//添加 .add方法
+    // 渲染器
+    let renderer = null;
+    let canvas =
+      document.getElementById('webglcanvas');
+      renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true
+      });
+
+    renderer.setSize(canvas.width,
+     canvas.height);
+    
+    //  场景 
+    scene = new THREE.Scene();
+    // 透视相机 45度 最近的距离1 最远距离4000
+    camera = new THREE.PerspectiveCamera(45,
+    canvas.width/canvas.height,1,4000);
+    scene.add(camera);
+    //光源 0x00ff00颜色  1.5宽度
+    var light =
+     new THREE.DirectionalLight(0x00ff00,1.5);
+     light.position.set(0,0,1);
+     scene.add(light);
+    // 3D世界的基础 camera scene renderer
+    // 立方体 
+    // 数学形状 
+    // 球体 表面贴上（瓷砖）纹理，即地球
+    // 数学形状， 立方体 长宽高 2，2，2
+    let geometry = new THREE.CubeGeometry(2,2,2);
+    //  添加纹理
+    let mapUrl = 'webgl-logo-256.jpg';
+    // 加载图片
+    let map = 
+      THREE.ImageUtils.loadTexture(mapUrl);
+      let material =new THREE.MeshPhongMaterial
+({
+        map: map
+      });
+    let cube = 
+      new THREE.Mesh(geometry,material);
+      cube.position.z = -5;
+      // 旋转 rotation
+      cube.rotation.x = Math.PI/5;
+      cube.rotation.y = Math.PI/5;
+      console.log(cube);
+
+      scene.add(cube);
+        run();
+
+    function run(){
+      // 请求运动帧 调用显卡刷新 WebGL调动显卡
+      requestAnimationFrame(function() {
+        run();
+      })
+      renderer.render(scene,camera);
+      //转动
+      animation();
+    }
+     var duration = 5000;
+    //  得到当前时间
+    var currentTime = Date.now();
+     console.log(currentTime);
+    function animation () {
+       let now = Date.now();
+       
+       let deltat = now - currentTime;
+      //  console.log(deltat);
+      currentTime = now;
+      let fractt=deltat/duration;
+      // let angel=Math.PI*2*fract;
+      // cube.rotation.y += Math.PI*2*fractt;
+      cube.rotation.y += 0.03;
+    }
+  </script>
+</body>
+</html>
