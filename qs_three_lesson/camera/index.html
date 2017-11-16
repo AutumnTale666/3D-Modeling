@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Camera 相机</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="300" 
+  style="border: 1px solid red;margin: 50px auto;display:block;"></canvas>
+  <script src="./libs/three.min.js"></script>
+  <script>
+
+     var camera, scene, renderer, canvas;
+     init();
+     function init() {
+         canvas =
+          document.getElementById('canvas');
+
+          // 场景
+          scene =
+           new THREE.Scene();
+          camera =
+           new THREE.PerspectiveCamera(45, //角度
+           400/300, //拍摄的宽高比
+           1, 10);//拍摄远近
+          //  正中心点（0，0）
+          camera.position.set(0,0, 5);//正值 右，上，外
+          scene.add(camera);
+          // mesh<-geometry+material
+          var geometry =
+           new THREE.CubeGeometry(1,1,1);
+           var material =
+            new THREE.MeshBasicMaterial({
+              color: 0xff0000 //红色
+              // wireframe: true 
+              
+            });
+
+          var cube = new THREE.Mesh(geometry, material);
+          scene.add(cube);
+
+         //输出
+          renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            // 平滑， 抗锯齿
+            antialias: true
+           });
+          renderer.setSize(canvas.width,
+        canvas.height);
+        renderer.render(scene, camera);
+     }
+  </script>
+</body>
+</html>
