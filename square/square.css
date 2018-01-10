@@ -1,0 +1,69 @@
+ 
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p
+a, img, ol, ul, li
+{
+    margin:0;padding:0;border:0;outline:0;
+}
+#experiment{
+    -webkit-perspective: 800;
+    -webkit-perspective-origin: 50% 50%;
+}
+#cube{
+    position: relative;
+    margin:100px auto;
+    height:200px;
+    width:200px;
+    -webkit-transform-style:preserve-3d;
+}
+.face{
+    position:absolute;
+    height:160px;
+    width:160px;
+    padding:20px;
+    /* background-color: black; */
+
+    color:white;
+    font-weight:bold;
+    font-size:160px;
+    line-height:160px;
+    text-align:center;
+
+    -webkit-transition: -webkit-transform 1s linear;
+}
+#face1  {
+    background-color:rebeccapurple;
+}
+#face2 {
+    -webkit-transform-origin:right;
+    -webkit-transform: rotateY(-90deg);
+    background-color: greenyellow;
+}
+#face3 {
+    -webkit-transform-origin:left;
+    -webkit-transform: rotateY(90deg);
+    background-color: brown;
+}
+#face4 {
+    -webkit-transform-origin:top;
+    -webkit-transform: rotateX(-90deg);
+    background-color: lightblue;
+}
+#face5 {
+    -webkit-transform-origin:bottom;
+    -webkit-transform: rotateX(90deg);
+    background-color: saddlebrown;
+}
+#face6 {
+    -webkit-transform: translateZ(-200px);
+    background-color: slategray;
+}
+
+#op{
+    margin:0 auto;
+    font-size:16px;
+    font-weight:bold;
+    width:800px;
+}
+#op .range-control{width:721px;}
+ 
